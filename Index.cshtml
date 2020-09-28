@@ -1,0 +1,42 @@
+@model demo.MVC.Models.OpenWeatherMap
+<style>
+    #apiDiv {
+        padding-left: 20px;
+		background: #42D76B ;
+    }
+
+        #apiDiv select, #apiDiv button {
+         background: rgb(28, 184, 65);
+	     font-size:50px;
+		
+        }
+
+
+        #apiDiv #message table {
+            width: 100%;
+            border: double 8px #181717;
+            background: #409CEE;
+        }
+
+            #apiDiv #message table th {
+                text-align: left;
+                background: #409CEE;
+            }
+</style>
+<h1>Weatherman DCU's 5 day forecast:</h1>
+
+<div id="apiDiv">
+    <h2>Select a city you would like a weather report for:</h2>
+    @using (Html.BeginForm())
+    {
+        foreach (var city in Model.cities)
+        {
+            <span>
+                @Html.RadioButtonFor(m => m.cities, city.Value) @city.Key
+            </span>
+        }
+
+	<h3><button name="Submit">Let's see the forecast!</button></h3>
+    }
+    <div id="message">@(new HtmlString(Model.apiResponse))</div>
+</div>
